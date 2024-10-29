@@ -1,12 +1,15 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-dotenv.config()
+import express from 'express'
+import { connect } from 'mongoose'
+import { config } from 'dotenv'
+config()
+
+
+import userRoute from './routes/user.route.js'
 
 const app = express()
 
 // connect to mongoDB
-mongoose.connect(process.env.MONGO)
+connect(process.env.MONGO)
 .then(()=> {
     console.log("connected to DB")
 })
@@ -18,3 +21,5 @@ mongoose.connect(process.env.MONGO)
 app.listen(3000, ()=> {
     console.log("listening to port 3000")
 })
+
+app.use('/api/user', userRoute)
