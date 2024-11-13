@@ -1,6 +1,7 @@
 import express from 'express'
 import { connect } from 'mongoose'
 import { config } from 'dotenv'
+import cookieParser from 'cookie-parser'
 config()
 
 
@@ -12,6 +13,7 @@ const app = express()
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
+app.use(cookieParser())
 
 // connect to mongoDB
 connect(process.env.MONGO)
