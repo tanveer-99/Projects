@@ -6,7 +6,6 @@ export const test = (req, res)=> {
 }
 
 export const updateUser = async (req, res, next)=> {
-    req.body.username = req.body.username.toLowerCase()
     if(req.user.id !== req.params.userId) {
         return next(errorHandler(403, 'You are not allowed to update this user'))
     }
@@ -40,7 +39,7 @@ export const updateUser = async (req, res, next)=> {
         const {password, ...rest} = updatedUser._doc
         res.status(200).json(rest)
     } catch (error) {
-        next(error)
+        next(error) 
     }
     
 }
